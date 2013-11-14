@@ -1,5 +1,7 @@
 sms-online-api
 ==============
+API for the [smsonline.ru](http://smsonline.ru/) messaging service
+
 
 ### Composer
 tbd...
