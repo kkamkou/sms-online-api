@@ -13,7 +13,7 @@ $sms->send('76543210987', 'TestMessage');
 $sms->send('76543210987', 'TestMessage', array('from' => 'MySite'));
 ```
 
-#### Your own client
+#### Your own client (Default is CURL)
 ```php
 $client = new MyClient(array('timeout' => 40));
 $sms = new \SmsOnline\Api(array('client' => $client));
