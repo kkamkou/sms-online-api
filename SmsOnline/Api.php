@@ -10,11 +10,6 @@
 
 namespace SmsOnline;
 
-/**
- * Class Api
- *
- * @package SmsOnline
- */
 class Api
 {
     /** @var Client\ClientInterface */
