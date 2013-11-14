@@ -4,15 +4,24 @@ sms-online-api
 
 #### Example
 ```php
-$sms = new \SmsOnline\Api(array('api' => ...));
-$result = $sms->send('76543210987', 'TestMessage');
-var_dump($result);
+$sms = new \SmsOnline\Api(array('api' => array('user' => '', 'secret_key' => '')));
+$sms->send('76543210987', 'TestMessage');
+$sms->send('76543210987', 'TestMessage', array('from' => 'MySite'));
 ```
 
 #### Your own client
 ```php
 $client = new MyClient(array('timeout' => 40));
 $sms = new \SmsOnline\Api(array('client' => $client));
+```
+
+#### Response
+```php
+$result = $sms->send('76543210987', 'TestMessage');
+if ($result->isSuccessful()) {
+  print_r($result->toArray());
+  echo (string)$result;
+}
 ```
 
 ### Tests
