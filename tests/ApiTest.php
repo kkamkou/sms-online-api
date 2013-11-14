@@ -1,8 +1,8 @@
 <?php
-require __DIR__ . '/../library/Client/ClientInterface.php';
-require __DIR__ . '/../library/Client/Response.php';
-require __DIR__ . '/../library/Client/Curl.php';
-require __DIR__ . '/../library/Api.php';
+require __DIR__ . '/../SmsOnline/Client/ClientInterface.php';
+require __DIR__ . '/../SmsOnline/Client/Response.php';
+require __DIR__ . '/../SmsOnline/Client/Curl.php';
+require __DIR__ . '/../SmsOnline/Api.php';
 
 class ApiTest extends PHPUnit_Framework_TestCase
 {
