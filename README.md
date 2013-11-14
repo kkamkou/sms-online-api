@@ -31,7 +31,7 @@ if ($result->isSuccessful()) {
 
 ### Tests
 ```sh
-phpcs --standard=psr2 library
+phpcs --standard=psr2 SmsOnline
 phpunit tests
 ```
 

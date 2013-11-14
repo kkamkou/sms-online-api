@@ -69,7 +69,7 @@ final class Response
 
     /**
      * Response parsing method
-     * 
+     *
      * @return $this
      */
     private function decodeResponse()
