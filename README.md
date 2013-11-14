@@ -4,7 +4,8 @@ API for the [smsonline.ru](http://smsonline.ru/) messaging service
 
 
 ### Composer
-tbd...
+Add ```"kkamkou/sms-online-api": "dev-master"``` to a composer.json file, to the require section
+and execute ```composer update```
 
 #### Example
 ```php

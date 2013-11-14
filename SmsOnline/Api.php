@@ -1,11 +1,26 @@
 <?php
+/**
+ * sms-online-api - API for the smsonline.ru messaging service
+ *
+ * @package  SmsOnline
+ * @author   Kanstantsin A Kamkou (2ka.by)
+ * @license  http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @link     http://github.com/kkamkou/sms-online-api
+ */
 
 namespace SmsOnline;
 
+/**
+ * Class Api
+ *
+ * @package SmsOnline
+ */
 class Api
 {
+    /** @var Client\ClientInterface */
     private $client = null;
 
+    /** @var array */
     protected $options = array(
         'api' => array(
             'user' => null,
@@ -26,6 +41,10 @@ class Api
         )
     );
 
+    /**
+     * Constructor
+     * @param array $opts
+     */
     public function __construct(array $opts)
     {
         // merging options
@@ -35,11 +54,21 @@ class Api
         $this->client = $this->getClient();
     }
 
+    /**
+     * Returns a set of options for the current object
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return $this->options;
     }
 
+    /**
+     * Returns a client instance
+     *
+     * @return Client\ClientInterface
+     */
     public function getClient()
     {
         if ($this->options['client'] instanceof Client\ClientInterface) {
@@ -53,6 +82,14 @@ class Api
         return $client;
     }
 
+    /**
+     * Sends message to a mobile device
+     *
+     * @param string $phone A phone number (765432123456)
+     * @param string $txt A message to send
+     * @param array $opts (Default: array())
+     * @return mixed
+     */
     public function send($phone, $txt, array $opts = array())
     {
         // defaults
@@ -70,6 +107,14 @@ class Api
             ->getResponse();
     }
 
+    /**
+     * Generates auth signature
+     *
+     * @param string $phone
+     * @param string $txt
+     * @param string $from
+     * @return string
+     */
     protected function getSign($phone, $txt, $from)
     {
         return md5(
