@@ -1,6 +1,8 @@
 sms-online-api
 ==============
 
+### Composer
+tbd...
 
 #### Example
 ```php
