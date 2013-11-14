@@ -1,0 +1,26 @@
+{
+  "name": "kkamkou/sms-online-api",
+  "description": "API for the smsonline.ru messaging service",
+  "type": "library",
+  "homepage": "http://github.com/kkamkou/sms-online-api",
+  "license": "MIT",
+  "keywords": [
+    "sms",
+    "smsonline"
+  ],
+  "authors": [
+    {
+      "name": "Kanstantsin Kamkou",
+      "email": "kkamkou@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "ext-curl" : "*"
+  },
+  "autoload": {
+    "psr-0": {
+      "SmsOnline": "/library/"
+    }
+  }
+}
