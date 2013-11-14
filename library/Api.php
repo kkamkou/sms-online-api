@@ -10,18 +10,19 @@ class Api
         'api' => array(
             'user' => null,
             'secret_key' => null,
-            'from' => 'sms-online-api',
-            'client' => 'curl',
-            'url' => 'https://bulk.sms-online.com/'
+            'url' => 'https://bulk.sms-online.com/',
+            'client' => 'curl'
         ),
         'msg' => array(
             'hex' => 0,
             'dlr' => 0,
-            'charset' => 'UTF-8'
+            'delay' => 0,
+            'charset' => 'UTF-8',
+            'from' => 'SmsOnline'
         ),
         'client' => array(
-            'timeout' => 10,
-            'method' => 'POST'
+            'connecttimeout' => 10,
+            'timeout' => 10
         )
     );
 
@@ -47,31 +48,33 @@ class Api
             // the client object itself (php < 5.4)
             $className = __NAMESPACE__ . '\\Client\\' .
                 ucfirst(strtolower($this->options['api']['client']));
-            $client = new $className();
+            $client = new $className($this->options['client']);
         }
-        $client->setUrl($this->options['api']['url']);
         return $client;
     }
 
     public function send($phone, $txt, array $opts = array())
     {
         // defaults
-        $sign = $this->getSign($phone, $txt);
-        $opts = array_merge(
-            $this->options['msg'],
-            array('phone' => $phone, $txt => $txt),
-            $opts
+        $opts = array_replace($this->options['msg'], $opts);
+        $sign = $this->getSign($phone, $txt, $opts['from']);
+        $opts = array_replace(
+            $opts,
+            array('phone' => $phone, 'txt' => $txt, 'sign' => $sign),
+            array('user' => $this->options['api']['user'])
         );
 
         // setting up the client
-        $client->resetParameters($opts);
+        return $this->client->resetParameters($opts)
+            ->setUrl($this->options['api']['url'])
+            ->getResponse();
     }
 
-    protected function getSign($phone, $txt)
+    protected function getSign($phone, $txt, $from)
     {
         return md5(
-            $this->options['api']['user'] . $this->options['api']['from'] .
-            $phone . $txt . $this->options['api']['secret_key']
+            $this->options['api']['user'] . $from . $phone . $txt .
+            $this->options['api']['secret_key']
         );
     }
 }
