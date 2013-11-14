@@ -49,21 +49,4 @@ final class Response
             return $this;
         }
     }
-
-    private function getStatusByCode($code)
-    {
-        $codes = array(
-            -1 => 'not delivered',
-            -2 => 'expired',
-            -3 => 'rejected',
-            -4 => 'temporary tech error',
-            -5 => 'sms-limit reached',
-            0  => 'delivered',
-            1  => 'buffered',
-            2  => 'absent',
-            3  => 'preparing',
-            4  => 'unknown'
-        );
-        return array_key_exists($code, $codes) ? $codes[$code] : 'see getRawResponse()';
-    }
 }
