@@ -38,10 +38,13 @@ final class MyClient extends \SmsOnline\Client\Curl
     public function resetParameters(array $params)
     {
         parent::resetParameters($params);
+
         curl_setopt($this->instance, CURLOPT_CAINFO, 'pathToCert');
         // bad option goes here
         // curl_setopt($this->instance, CURLOPT_SSL_VERIFYHOST, 0);
         // curl_setopt($this->instance, CURLOPT_SSL_VERIFYPEER, 0);
+
+        return $this;
     }
 }
 ```
