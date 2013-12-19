@@ -88,12 +88,11 @@ final class Response
 
         // we have xml error
         if (libxml_get_last_error()) {
-            $this->error = new \Exception(
-                'XML parser returned the error: ' . libxml_get_last_error()->message
-            );
+            $this->error = new \Exception('XML error: ' . libxml_get_last_error()->message);
             return $this;
         }
 
+        // we have format error
         if (!isset($this->xml->code) || !isset($this->xml->tech_message)) {
             $this->error = new \UnexpectedValueException('Response code/tech_message is not found');
             return $this;
