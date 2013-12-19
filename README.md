@@ -31,22 +31,17 @@ if ($result->isSuccessful()) {
 
 #### HowTo
 ##### SSL certificate problem
-You have to create your own client class and use it. Or extend the ```Curl.php```:
 ```php
-final class MyClient extends \SmsOnline\Client\Curl
-{
-    public function resetParameters(array $params)
-    {
-        parent::resetParameters($params);
-
-        curl_setopt($this->instance, CURLOPT_CAINFO, 'pathToCert');
-        // bad option goes here
-        // curl_setopt($this->instance, CURLOPT_SSL_VERIFYHOST, 0);
-        // curl_setopt($this->instance, CURLOPT_SSL_VERIFYPEER, 0);
-
-        return $this;
-    }
-}
+$sms = new \SmsOnline\Api(
+    array(
+        'client' => array(
+            'cainfo' => 'pathToCert'
+            // bad option goes here
+            //'ssl_verifyhost' => 0,
+            //'ssl_verifypeer' => 0
+        )
+    )
+);
 ```
 
 ### Tests
