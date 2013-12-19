@@ -74,7 +74,25 @@ final class Response
      */
     private function decodeResponse()
     {
+        // storing libxml state
+        $oldState = libxml_use_internal_errors(true);
+
+        // errors cleanup
+        libxml_clear_errors();
+
+        // response has XML format, we have to parse it
         $this->xml = simplexml_load_string($this->body);
+
+        // restoring default state
+        libxml_use_internal_errors($oldState);
+
+        // we have xml error
+        if (libxml_get_last_error()) {
+            $this->error = new \Exception(
+                'XML parser returned the error: ' . libxml_get_last_error()->message
+            );
+            return $this;
+        }
 
         if (!isset($this->xml->code) || !isset($this->xml->tech_message)) {
             $this->error = new \UnexpectedValueException('Response code/tech_message is not found');
