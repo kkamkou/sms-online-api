@@ -79,7 +79,7 @@ class Curl implements ClientInterface
 
     /**
      * Returns a new response object
-     * @return Response
+     * @return string
      */
     public function getResponse()
     {
@@ -90,6 +90,6 @@ class Curl implements ClientInterface
             );
         }
 
-        return new Response($result);
+        return $result;
     }
 }

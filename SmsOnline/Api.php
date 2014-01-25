@@ -83,7 +83,7 @@ class Api
      * @param string $phone A phone number (765432123456)
      * @param string $txt A message to send
      * @param array $opts (Default: array())
-     * @return mixed
+     * @return Client\Response
      */
     public function send($phone, $txt, array $opts = array())
     {
@@ -97,9 +97,11 @@ class Api
         );
 
         // setting up the client
-        return $this->client->resetParameters($opts)
-            ->setUrl($this->options['api']['url'])
-            ->getResponse();
+        return new Client\Response(
+            $this->client->resetParameters($opts)
+              ->setUrl($this->options['api']['url'])
+              ->getResponse()
+        );
     }
 
     /**
