@@ -2,6 +2,7 @@
   "name": "kkamkou/sms-online-api",
   "description": "API for the smsonline.ru messaging service",
   "type": "library",
+  "version": "1.0.0",
   "homepage": "http://github.com/kkamkou/sms-online-api",
   "license": "MIT",
   "keywords": [
