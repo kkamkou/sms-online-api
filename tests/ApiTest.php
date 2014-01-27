@@ -6,7 +6,7 @@ require __DIR__ . '/../SmsOnline/Api.php';
 
 class ApiTest extends PHPUnit_Framework_TestCase
 {
-    protected $mobileNumber = '1234567890123';
+    protected $mobileNumber = '+(123) 45 678-90-12';
     protected $secretKey = 'secretKey';
     protected $user = 'user';
     protected $sms;

@@ -87,6 +87,9 @@ class Api
      */
     public function send($phone, $txt, array $opts = array())
     {
+        // the phone number cleanup
+        $phone = preg_replace('~[^\d]~', '', $phone);
+
         // defaults
         $opts = array_replace($this->options['msg'], $opts);
         $sign = $this->getSign($phone, $txt, $opts['from']);
