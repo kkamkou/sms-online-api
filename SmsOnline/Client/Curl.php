@@ -34,11 +34,11 @@ class Curl implements ClientInterface
         }
 
         // creating a new instance
-        $this->instance = \curl_init();
+        $this->instance = curl_init();
 
         // we have options to apply
         foreach ($opts as $name => $value) {
-            \curl_setopt($this->instance, constant('CURLOPT_' . strtoupper($name)), $value);
+            curl_setopt($this->instance, constant('CURLOPT_' . strtoupper($name)), $value);
         }
     }
 
@@ -47,7 +47,7 @@ class Curl implements ClientInterface
      */
     public function __destruct()
     {
-        \curl_close($this->instance);
+        curl_close($this->instance);
     }
 
     /**
@@ -58,7 +58,7 @@ class Curl implements ClientInterface
      */
     public function setUrl($url)
     {
-        \curl_setopt($this->instance, CURLOPT_URL, $url);
+        curl_setopt($this->instance, CURLOPT_URL, $url);
         return $this;
     }
 
@@ -70,10 +70,10 @@ class Curl implements ClientInterface
      */
     public function resetParameters(array $params)
     {
-        \curl_setopt($this->instance, CURLOPT_POST, 1);
-        \curl_setopt($this->instance, CURLOPT_RETURNTRANSFER, 1);
-        \curl_setopt($this->instance, CURLOPT_USERAGENT, 'sms-online-api (github.com)');
-        \curl_setopt($this->instance, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($this->instance, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($this->instance, CURLOPT_USERAGENT, 'sms-online-api (github.com)');
+        curl_setopt($this->instance, CURLOPT_POST, 1);
+        curl_setopt($this->instance, CURLOPT_POSTFIELDS, http_build_query($params));
         return $this;
     }
 
@@ -83,10 +83,10 @@ class Curl implements ClientInterface
      */
     public function getResponse()
     {
-        $result = \curl_exec($this->instance);
+        $result = curl_exec($this->instance);
         if ($result === false) {
             $result = new \UnexpectedValueException(
-                'Request faild: ' . \curl_error($this->instance)
+                'Request faild: ' . curl_error($this->instance)
             );
         }
 
