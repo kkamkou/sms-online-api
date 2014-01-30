@@ -6,10 +6,11 @@ require __DIR__ . '/../SmsOnline/Api.php';
 
 class ApiTest extends PHPUnit_Framework_TestCase
 {
+    /** @var \SmsOnline\Api */
+    protected $sms;
     protected $mobileNumber = '+(123) 45 678-90-12';
     protected $secretKey = 'secretKey';
     protected $user = 'user';
-    protected $sms;
 
     public function setUp()
     {
@@ -30,14 +31,27 @@ class ApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($currOptions['api']['user'], 'phpunit');
         $this->assertEquals($class->getClient(), $client);
 
-        $client = new \SmsOnline\Api(array());
         $this->assertInstanceOf('\\SmsOnline\\Client\\ClientInterface', $class->getClient());
     }
 
-    public function testSend()
+    public function testSendResponse()
     {
         $result = $this->sms->send($this->mobileNumber, 'SmsOnline TestMessage');
         $this->assertInstanceOf('\\SmsOnline\\Client\\Response', $result);
+    }
+
+    public function testRealSend()
+    {
+        if ($this->secretKey == 'secretKey') {
+            return $this->markTestSkipped('To run this test I need the real information');
+        }
+
+        $msg = <<<EOF
+Test Message
+Goes here
+EOF;
+        $result = $this->sms->send($this->mobileNumber, $msg);
+        $this->assertTrue($result->isSuccessful());
     }
 
     /**
