@@ -36,7 +36,7 @@ $sms = new \SmsOnline\Api(
     array(
         'client' => array(
             'cainfo' => 'pathToCert'
-            // bad option goes here
+            // or you can disable ssl verification (bad idea)
             //'ssl_verifyhost' => 0,
             //'ssl_verifypeer' => 0
         )
