@@ -90,9 +90,6 @@ class Api
         // the phone number cleanup
         $phone = preg_replace('~[^\d]~', '', $phone);
 
-        // workaround for the "\n" char
-        $txt = str_replace(array("\r\n", "\r", "\n"), ' ', $txt);
-
         // defaults
         $opts = array_replace($this->options['msg'], $opts);
         $sign = $this->getSign($phone, $txt, $opts['from']);
