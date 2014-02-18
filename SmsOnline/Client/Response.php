@@ -64,7 +64,7 @@ final class Response
      */
     public function __toString()
     {
-        return $this->body;
+        return (string)$this->body;
     }
 
     /**

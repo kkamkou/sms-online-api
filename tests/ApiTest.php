@@ -54,6 +54,12 @@ EOF;
         $this->assertTrue($result->isSuccessful());
     }
 
+    public function testResponseToStringEmpty()
+    {
+        $result = new \SmsOnline\Client\Response(0);
+        $this->assertInternalType('string', (string)$result);
+    }
+
     /**
      * @dataProvider responseProviderOk
      */
